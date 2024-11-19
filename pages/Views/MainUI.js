@@ -1,14 +1,14 @@
-import { useUser } from '../Context/UserContext'; // Import useUser hook
+import { useUser } from '../Context/UserContext'; 
 import styles from '../../styles/Home.module.css';
 import LogOutButton from '../Components/LogOutButton';
 import { useRouter } from 'next/router';
 
 const MainUI = () => {
-  const { user } = useUser(); // Access the user from context
+  const { user } = useUser(); 
   const router = useRouter();
 
   const onLogout = () => {
-    router.push('/'); // Navigate to login page after logout
+    router.push('/');
   };
 
   const handleClick = (boxName) => {
@@ -16,7 +16,7 @@ const MainUI = () => {
   };
 
   if (!user) {
-    return <div>Loading...</div>; // Show loading or redirect if user is not available
+    return <div>Loading...</div>; 
   }
 
   return (

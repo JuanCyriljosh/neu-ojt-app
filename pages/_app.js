@@ -1,5 +1,4 @@
-import { UserProvider } from '../pages/Context/UserContext'; // Import UserProvider for global state
-import '../styles/globals.css'; // Your global styles
+import { UserProvider } from '../pages/Context/UserContext'; 
 
 function MyApp({ Component, pageProps }) {
   return (
