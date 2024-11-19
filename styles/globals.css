@@ -1,7 +1,20 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Add this code to your globals.css file */
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;  /* Prevent horizontal overflow */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;  /* Make sure padding and borders are included in element width */
+}
+
+/* Dark mode and other global styles can remain below */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -12,10 +25,4 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }

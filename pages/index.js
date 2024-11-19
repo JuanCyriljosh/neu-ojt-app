@@ -3,38 +3,33 @@ import { useRouter } from 'next/router';
 import { useUser } from './Context/UserContext'; 
 import LogInButton from './Components/LogInButton';
 import './index.css';
+import '../styles/globals.css';
+
 
 const LoginPage = () => {
   const { setUser } = useUser(); 
   const router = useRouter();
 
-  // Handle successful login
   const handleLoginSuccess = (response) => {
     console.log("Login Success: ", response);
     
-    // Decode the JWT to get user information
     const userData = response?.credential ? JSON.parse(atob(response.credential.split('.')[1])) : null;
     
     if (userData) {
-      // Extract user data like name, email, and profile picture
       const { name, email, picture } = userData;
       
-      // Set user details into the context or state
       setUser({
         name,
         email,
-        profilePicture: picture, // Store profile picture URL
+        profilePicture: picture, 
       });
       
-      // Redirect to the main UI page after login
       router.push('/Views/MainUI');
     }
   };
 
-  // Handle login failure
   const handleLoginFailure = (response) => {
     console.log("Login Failed: ", response);
-    // Optionally, you can show a failure message or redirect
   };
 
   return (

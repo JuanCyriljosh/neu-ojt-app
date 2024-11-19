@@ -1,18 +1,16 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-}
 
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100%;  /* Ensures the container takes up full width */
   font-family: Arial, sans-serif;
   background-color: #6e6e6e;
+  width: 100vw;
+  overflow: hidden;  /* Prevents overflow */
 }
+
 
 .card {
   padding: 40px;
@@ -20,7 +18,10 @@ html, body {
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  max-width: 100%;  /* Ensure it doesn’t overflow */
+  box-sizing: border-box;  /* Prevent padding from adding to width */
 }
+
 
 h1 {
   color: #333;
