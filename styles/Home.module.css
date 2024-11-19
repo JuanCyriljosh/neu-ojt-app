@@ -1,0 +1,53 @@
+/* styles/Home.module.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  position: relative; /* Add this line to allow absolute positioning of child elements */
+}
+
+.boxContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 80%;
+  max-width: 600px;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  background-color: #0070f3;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.box:hover {
+  background-color: #005bb5;
+}
+
+.logoutButton {
+  position: absolute; /* Position it absolutely within the container */
+  top: 20px; /* Adjust top positioning */
+  right: 20px; /* Adjust right positioning */
+  background-color: #ff4d4d;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.logoutButton:hover {
+  background-color: #d32f2f;
+}
