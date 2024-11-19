@@ -1,12 +1,11 @@
-import { useUser } from '../Context/UserContext'; 
+// pages/Views/MainUI.js
+import { useUser  } from '../Context/UserContext'; 
 import styles from '../../styles/Home.module.css';
 import LogOutButton from '../Components/LogOutButton';
 import { useRouter } from 'next/router';
-import '../../styles/globals.css';
-
 
 const MainUI = () => {
-  const { user } = useUser(); 
+  const { user } = useUser (); 
   const router = useRouter();
 
   const onLogout = () => {

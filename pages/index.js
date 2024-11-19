@@ -2,8 +2,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useRouter } from 'next/router';
 import { useUser } from './Context/UserContext'; 
 import LogInButton from './Components/LogInButton';
-import './index.css';
-import '../styles/globals.css';
+
 
 
 const LoginPage = () => {
