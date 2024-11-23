@@ -1,9 +1,5 @@
-import { BlobStore } from '@vercel/blob';  
+import { put } from '@vercel/blob';  
 import multiparty from 'multiparty';  
-import { Readable } from 'stream';
-import fs from 'fs'; // Make sure to import fs
-
-const containerName = 'RequirementFiles';  // Your container name on Vercel Blob Storage
 
 export const config = {
   api: {
@@ -23,25 +19,11 @@ export default async function handler(req, res) {
 
       const file = formData.file[0]; 
 
-      // Read the file buffer
-      const fileBuffer = fs.readFileSync(file.path);
-      const fileStream = Readable.from(fileBuffer); // Create a readable stream from the buffer
-
-      // Initialize BlobStore
-      const blobstore = new BlobStore({
-        container: containerName,  // Your container on Vercel Blob Storage
-      });
-
-      // Upload the file stream directly to BlobStore (no local file storage required)
-      const uploadResult = await blobstore.upload(fileStream, {
-        filename: file.originalFilename,  // Use original file name
-        access: 'public',  // Optionally, you can make it public
-      });
-
-      const blobUrl = uploadResult.url;  // Get the URL of the uploaded file
+      // Upload the file directly to Vercel Blob
+      const blob = await put(`RequirementFiles/${file.originalFilename}`, file.path, { access: 'public' });
 
       // Respond with the URL of the uploaded file
-      return res.status(200).json({ success: true, blobUrl });
+      return res.status(200).json({ success: true, blobUrl: blob.url });
     } catch (error) {
       console.error('Error uploading file:', error);
       return res.status(500).json({ success: false, error: error.message });
@@ -55,8 +37,6 @@ export default async function handler(req, res) {
 const parseForm = (req) => {
   return new Promise((resolve, reject) => {
     const form = new multiparty.Form();  // Initialize multiparty form parser
-
-    // Set up multiparty options
     form.keepExtensions = true;  // Retain file extensions
 
     // Parse the incoming request
