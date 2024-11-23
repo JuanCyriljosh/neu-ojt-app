@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useUser } from '../Context/UserContext';
-import '../../styles/UploadRequirement.css';
+import { useUser  } from '../Context/UserContext';
+import styles from '../../styles/UploadRequirement.module.css'; // Importing the CSS Module
 
 const UploadRequirements = () => {
   const [files, setFiles] = useState({});
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
-  const { user } = useUser();
+  const { user } = useUser ();
 
   const handleFileUpload = async (event, key) => {
     const file = event.target.files[0];
@@ -51,36 +51,36 @@ const UploadRequirements = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       {/* Header bar with Back button */}
-      <div className="headerBar">
-        <div className="leftHeaderContent">
-          <div className="profile">
-            <div className="profileImagePlaceholder">
+      <div className={styles.headerBar}>
+        <div className={styles.leftHeaderContent}>
+          <div className={styles.profile}>
+            <div className={styles.profileImagePlaceholder}>
               {user.profilePicture ? (
-                <img src={user.profilePicture} alt="Profile" className="profileImage" />
+                <img src={user.profilePicture} alt="Profile" className={styles.profileImage} />
               ) : (
-                <div className="profileImagePlaceholderText">U</div>
+                <div className={styles.profileImagePlaceholderText}>U</div>
               )}
             </div>
-            <span className="profileName">{user.name || 'Guest'}</span>
+            <span className={styles.profileName}>{user.name || 'Guest'}</span>
           </div>
         </div>
 
-        <div className="centerHeaderContent">
-          <h1 className="headingTitle">Upload Requirements</h1>
+        <div className={styles.centerHeaderContent}>
+          <h1 className={styles.headingTitle}>Upload Requirements</h1>
         </div>
 
-        <button className="backButton" onClick={handleBackClick}>
+        <button className={styles.backButton} onClick={handleBackClick}>
           Back to Main UI
         </button>
       </div>
 
-      <div className="boxContainer">
+      <div className={styles.boxContainer}>
         {['PDF Document 1', 'PDF Document 2', 'PDF Document 3', 'PDF Document 4'].map((label) => (
-          <div className="box" key={label}>
-            <span className="label">{label}:</span>
-            <label htmlFor={`fileInput-${label}`} className="uploadBox">
+          <div className={styles.box} key={label}>
+            <span className={styles.label}>{label}:</span>
+            <label htmlFor={`fileInput-${label}`} className={styles.uploadBox}>
               {files[label] ? files[label].file.name : 'Click to Upload'}
             </label>
             <input
@@ -91,9 +91,9 @@ const UploadRequirements = () => {
               onChange={(e) => handleFileUpload(e, label)}
             />
             {files[label] && (
-              <span className="fileName"> - {files[label].file.name}</span>
+              <span className={styles.fileName}> - {files[label].file.name}</span>
             )}
-            {uploading && <div className="uploadingIndicator">Uploading...</div>}
+            {uploading && <div className={styles.uploadingIndicator}>Uploading...</div>}
           </div>
         ))}
       </div>

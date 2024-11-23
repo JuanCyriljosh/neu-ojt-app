@@ -1,16 +1,19 @@
+/* UploadRequirement.module.css */
+
 /* Header Bar styles */
-.headingBar {
+.headerBar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #007bff;
+    background-color: #333333; /* Changed to match your component */
     color: white;
-    padding: 10px 20px;
+    padding: 0 20px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
+    height: 60px;
 }
 
 /* Main container styles */
@@ -22,21 +25,7 @@
     height: 100vh;
     background-color: #cac9c9;
     position: relative;
-}
-
-/* Header Bar styles (revised version) */
-.headerBar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #333333;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    z-index: 10;
-    justify-content: space-between;
+    margin-top: 60px; /* To avoid overlap with fixed header */
 }
 
 /* Left Header Content (Profile) */
@@ -44,8 +33,6 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    position: absolute;
-    left: 20px;
 }
 
 .profile {
@@ -80,9 +67,6 @@
 
 /* Center Header Content (Title) */
 .centerHeaderContent {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     text-align: center;
 }
 
@@ -91,8 +75,8 @@
     color: white;
 }
 
-/* Right Header Content (Logout Button) */
-.logoutButton {
+/* Back button styling */
+.backButton {
     background-color: #505050;
     color: rgb(248, 248, 248);
     border: none;
@@ -101,18 +85,14 @@
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.1s;
-    position: absolute;
-    right: 60px;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
-.logoutButton:hover {
+.backButton:hover {
     background-color: #000000;
     transition: background-color 0.3s;
 }
 
-
+/* Box Container styles */
 .boxContainer {
     display: grid;
     grid-template-columns: 1fr; /* Set to 1 column */
@@ -123,7 +103,7 @@
     justify-content: center;
 }
 
-
+/* Individual box styles */
 .box {
     display: flex;
     flex-direction: column; /* Ensures content is arranged vertically inside the box */
@@ -145,6 +125,10 @@
     text-overflow: ellipsis; /* Truncate text with ellipsis if too long */
 }
 
+.box:hover {
+    background-color: #000000;
+}
+
 /* Label for file input */
 .uploadBox {
     display: block;
@@ -160,38 +144,14 @@
     text-overflow: ellipsis; /* Add ellipsis if the text is too long */
 }
 
-.box:hover {
-    background-color: #000000;
-}
-
-
-/* Back button styling */
-.backButton {
-    background-color: #505050;
-    color: rgb(248, 248, 248);
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.1s;
-    position: absolute;
-    right: 60px;  /* Position it on the top right */
-    top: 50%;
-    transform: translateY(-50%);  /* Center the button vertically */
-}
-
-.backButton:hover {
-    background-color: #000000;
-    transition: background-color 0.3s;
-}
-
+/* File name display */
 .fileName {
     display: block; /* Ensure it appears on a new line */
     margin-top: 4px; /* Space between the label and the file name */
     font-size: 18px; /* Adjust the font size */
     color: #ffffff; /* Change the color if needed */
-  }
-  .label {
+}
+
+.label {
     margin-right: 10px; /* Space between label and upload box */
-  }
+}
