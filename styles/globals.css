@@ -1,20 +1,18 @@
-/* Add this code to your globals.css file */
 
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow-x: hidden;  /* Prevent horizontal overflow */
+  overflow-x: hidden;  
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;  /* Make sure padding and borders are included in element width */
+  box-sizing: border-box; 
 }
 
-/* Dark mode and other global styles can remain below */
 :root {
   --background: #ffffff;
   --foreground: #171717;

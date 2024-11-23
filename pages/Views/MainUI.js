@@ -1,11 +1,11 @@
 // pages/Views/MainUI.js
-import { useUser  } from '../Context/UserContext'; 
+import { useUser } from '../Context/UserContext';
 import styles from '../../styles/Home.module.css';
 import LogOutButton from '../Components/LogOutButton';
 import { useRouter } from 'next/router';
 
 const MainUI = () => {
-  const { user } = useUser (); 
+  const { user } = useUser();
   const router = useRouter();
 
   const onLogout = () => {
@@ -13,11 +13,15 @@ const MainUI = () => {
   };
 
   const handleClick = (boxName) => {
-    alert(`You clicked on ${boxName}`);
+    if (boxName === 'Upload Requirements') {
+      router.push('/Views/UploadRequirements'); // Navigate to the Upload Requirements page
+    } else {
+      alert(`You clicked on ${boxName}`);
+    }
   };
 
   if (!user) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
   return (
