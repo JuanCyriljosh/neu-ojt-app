@@ -1,7 +1,6 @@
 import { BlobStore } from '@vercel/blob';  
 import multiparty from 'multiparty';  
-import fs from 'fs';
-import path from 'path';
+import { Readable } from 'stream';
 
 const containerName = 'RequirementFiles';  // Your container name on Vercel Blob Storage
 
@@ -22,15 +21,19 @@ export default async function handler(req, res) {
       }
 
       const file = formData.file[0]; 
-      const filePath = file.path;  
 
+      // Create a readable stream from the file buffer
+      const fileStream = fs.createReadStream(file.path);
+
+      // Initialize BlobStore
       const blobstore = new BlobStore({
-        container: containerName,  // Ensure this container is set up in Vercel
+        container: containerName,  // Your container on Vercel Blob Storage
       });
 
-      // Upload the file to BlobStore
-      const uploadResult = await blobstore.upload(filePath, {
-        filename: file.originalFilename,
+      // Upload the file stream directly to BlobStore (no local file storage required)
+      const uploadResult = await blobstore.upload(fileStream, {
+        filename: file.originalFilename,  // Use original file name
+        access: 'public',  // Optionally, you can make it public
       });
 
       const blobUrl = uploadResult.url;  // Get the URL of the uploaded file
@@ -51,8 +54,7 @@ const parseForm = (req) => {
   return new Promise((resolve, reject) => {
     const form = new multiparty.Form();  // Initialize multiparty form parser
 
-    // Optionally configure multiparty options
-    form.uploadDir = path.join(process.cwd(), 'tmp');  // This might still be used as temp storage for multiparty's file parsing
+    // Set up multiparty options
     form.keepExtensions = true;  // Retain file extensions
 
     // Parse the incoming request
