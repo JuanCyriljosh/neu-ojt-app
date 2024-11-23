@@ -1,6 +1,7 @@
 import { BlobStore } from '@vercel/blob';  
 import multiparty from 'multiparty';  
 import { Readable } from 'stream';
+import fs from 'fs'; // Make sure to import fs
 
 const containerName = 'RequirementFiles';  // Your container name on Vercel Blob Storage
 
@@ -22,8 +23,9 @@ export default async function handler(req, res) {
 
       const file = formData.file[0]; 
 
-      // Create a readable stream from the file buffer
-      const fileStream = fs.createReadStream(file.path);
+      // Read the file buffer
+      const fileBuffer = fs.readFileSync(file.path);
+      const fileStream = Readable.from(fileBuffer); // Create a readable stream from the buffer
 
       // Initialize BlobStore
       const blobstore = new BlobStore({
