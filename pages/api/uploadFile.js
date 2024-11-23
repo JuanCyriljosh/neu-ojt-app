@@ -3,11 +3,11 @@ import multiparty from 'multiparty';
 import fs from 'fs';
 import path from 'path';
 
-const containerName = 'RequirementFiles';
+const containerName = 'RequirementFiles';  // Your container name on Vercel Blob Storage
 
 export const config = {
   api: {
-    bodyParser: false,  
+    bodyParser: false,  // Disable default body parser
   },
 };
 
@@ -25,14 +25,15 @@ export default async function handler(req, res) {
       const filePath = file.path;  
 
       const blobstore = new BlobStore({
-        container: containerName, 
+        container: containerName,  // Ensure this container is set up in Vercel
       });
 
+      // Upload the file to BlobStore
       const uploadResult = await blobstore.upload(filePath, {
-        filename: file.originalFilename, 
+        filename: file.originalFilename,
       });
 
-      const blobUrl = uploadResult.url;
+      const blobUrl = uploadResult.url;  // Get the URL of the uploaded file
 
       // Respond with the URL of the uploaded file
       return res.status(200).json({ success: true, blobUrl });
@@ -41,7 +42,6 @@ export default async function handler(req, res) {
       return res.status(500).json({ success: false, error: error.message });
     }
   } else {
-    // Handle non-POST requests (only POST is allowed for file upload)
     return res.status(405).json({ success: false, message: 'Method Not Allowed' });
   }
 }
@@ -49,18 +49,18 @@ export default async function handler(req, res) {
 // Helper function to parse the incoming form data (file upload)
 const parseForm = (req) => {
   return new Promise((resolve, reject) => {
-    const form = new multiparty.Form(); // Initialize multiparty form parser
+    const form = new multiparty.Form();  // Initialize multiparty form parser
 
-    // Optionally configure multiparty options (e.g., upload directory, max file size)
-    form.uploadDir = path.join(process.cwd(), 'tmp'); // Save temporary files to 'tmp' directory
-    form.keepExtensions = true; // Retain file extensions on uploaded files
+    // Optionally configure multiparty options
+    form.uploadDir = path.join(process.cwd(), 'tmp');  // This might still be used as temp storage for multiparty's file parsing
+    form.keepExtensions = true;  // Retain file extensions
 
     // Parse the incoming request
     form.parse(req, (err, fields, files) => {
       if (err) {
-        reject(err);  // Reject if any errors occur during parsing
+        reject(err);  // Reject if errors during parsing
       } else {
-        resolve(files); // Resolve with the parsed files
+        resolve(files);  // Resolve with parsed files
       }
     });
   });

@@ -77,7 +77,7 @@ const UploadRequirements = () => {
       </div>
 
       <div className={styles.boxContainer}>
-        {['PDF Document 1', 'PDF Document 2', 'PDF Document 3', 'PDF Document 4'].map((label) => (
+        {['Parents Consent', 'Medical Exam', 'Psychological Exam', 'Resume'].map((label) => (
           <div className={styles.box} key={label}>
             <span className={styles.label}>{label}:</span>
             <label htmlFor={`fileInput-${label}`} className={styles.uploadBox}>
