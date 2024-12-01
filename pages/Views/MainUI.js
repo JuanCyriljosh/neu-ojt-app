@@ -14,7 +14,9 @@ const MainUI = () => {
 
   const handleClick = (boxName) => {
     if (boxName === 'Upload Requirements') {
-      router.push('/Views/UploadRequirements'); // Navigate to the Upload Requirements page
+      router.push('/Views/UploadRequirements');
+    } else if (boxName === 'Student Info') {
+      router.push('/Views/StudentInfo'); // Navigate to the Student Info page
     } else {
       alert(`You clicked on ${boxName}`);
     }
